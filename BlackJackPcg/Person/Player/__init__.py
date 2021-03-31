@@ -10,6 +10,5 @@ class Player(Person, ABC):
         self.username = username
         self.hand = []  # start with empty list - will hold the cards the player has
 
-
     def make_game_decision(self):
         pass

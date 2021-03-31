@@ -16,7 +16,8 @@ class Person(ABC):
         pass
 
     def add_card_to_hand(self, list_of_cards):
-        pass
+        for card in list_of_cards:
+            self.hand.append(card)
 
     def show_hand(self):
         for card in self.hand:
