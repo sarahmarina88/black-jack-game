@@ -6,6 +6,9 @@
 # gitignore template for Jupyter Notebooks
 # website: http://jupyter.org/
 
+#remove checking file
+checking_file.py
+
 #remove and csv or dat file:
 *.csv
 *.dat
