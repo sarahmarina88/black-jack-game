@@ -8,7 +8,7 @@ from BlackJackPcg.Utils import CardUtils
 
 class TestDeck(TestCase):
 
-    def test_deck_creation_givs_correct_number_of_cards(self):
+    def test_deck_creation_gives_correct_number_of_cards(self):
         #arrange
         d = Deck()
         #act

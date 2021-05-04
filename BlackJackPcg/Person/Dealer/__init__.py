@@ -9,7 +9,7 @@ class Dealer(Person):
 
     def make_game_decision(self):
         pass
+    #check score of hand - if less than 17 take a card otherwise stop?
 
     def show_hand_during_player_turn(self):
-        pass
-    # will show just one card and not the other to the player
+        self.hand[0].show()
