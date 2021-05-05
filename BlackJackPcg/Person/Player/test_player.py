@@ -39,6 +39,7 @@ class TestPlayer(TestCase):
         p.add_card_to_hand([Card("C", "A")])
         score_two = p.get_points_of_hand()
         p.add_card_to_hand([Card("D", "A")])
+        #check all the scores are adjusted as expected on adding aces to hand
         self.assertTrue(score == 12 and score_two == 13 and p.get_points_of_hand() == 14)
 
     def test_show_hand_gives_expected_string(self):
