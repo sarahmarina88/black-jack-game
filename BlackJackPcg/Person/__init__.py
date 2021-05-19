@@ -16,30 +16,25 @@ class Person(ABC):
         return self.hand
 
     def get_points_of_hand(self):
-        points_before_aces = 0
+        points_before_ace = 0
         ace_count = 0
         for card in self.hand:
-            if card.get_number() in ["J", "Q", "K"]:
-                points_before_aces += 10
-            elif card.get_number() != "A":
-                points_before_aces += (int(card.get_number()))
-            else:
+            if card.get_card_value() == 11:
                 ace_count += 1
-        if ace_count == 0:
-            return points_before_aces
-        else:
-            points = (points_before_aces + (ace_count * 11))
-            if points <= 21:
-                return points
             else:
-                for i in range(ace_count):
-                    points = points - 10
-                    if points <= 21:
-                        return points
+                points_before_ace += card.get_card_value()
+        # if all aces as 11 gives 21 or less return this
+        if points_before_ace + (11 * ace_count) <= 21:
+            return points_before_ace + (11 * ace_count)
+        # check one ace as 11 and the rest as 1 (2 or more aces as 11 -over 21) - if 21 or less return this
+        elif points_before_ace + 11 + ace_count - 1 <= 21:
+            return points_before_ace + 11 + ace_count - 1
+        # otherwise make all aces as 1
+        else:
+            return points_before_ace + ace_count
 
     def add_card_to_hand(self, list_of_cards):
-        for card in list_of_cards:
-            self.hand.append(card)
+        self.hand.extend(list_of_cards)
 
     def show_hand(self):
         for card in self.hand:
@@ -47,4 +42,5 @@ class Person(ABC):
 
     @abstractmethod
     def make_game_decision(self):
-        pass  # this is abstractmethod as different implementation for the player and the dealer
+        pass
+

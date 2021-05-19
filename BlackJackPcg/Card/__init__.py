@@ -24,3 +24,11 @@ class Card:
 
     def to_string(self):
         return "The card is: {}{}".format(self.number, self.suit)
+
+    def get_card_value(self):
+        if self.get_number() in ["J","Q","K"]:
+            return 10
+        elif self.get_number() == "A":
+            return 11
+        else:
+            return int(self.get_number())
