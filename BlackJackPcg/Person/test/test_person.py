@@ -4,24 +4,44 @@ import contextlib
 
 from BlackJackPcg.Card import Card
 from BlackJackPcg.Person import Person
-from BlackJackPcg.Person.Player import Player
+
 
 class TestPerson(TestCase):
 
-# these tests are currently not working - give TypeError: Can't instantiate abstract class Person with abstract methods make_game_decision
-# testing functions in player tests
     def test_person_initiates_with_empty_hand(self):
-        p = Person("test_person")
+        # arrange - first make a temp obj which is a bubble wrap of abstract obj
+        # class temp obj inherits from person and has the abstract function make_game_decision (not implemented)
+        class TempObj(Person):
+            def __int__(self, username):
+                super().__init__()
+            #have to have the abstract method
+
+            def make_game_decision(self):
+                raise NotImplementedError("It is an abstract test")
+        # make instance of the temporary object then do test on this
+        p = TempObj("test person")
         self.assertTrue(len(p.get_hand()) == 0)
 
     def test_addition_of_cards_to_hand_gives_expected_number_in_hand(self):
-        p = Person("test_person")
+        class TempObj(Person):
+            def __int__(self, username):
+                super().__init__(username)
+
+            def make_game_decision(self):
+                raise NotImplementedError("It is an abstract test")
+        p = TempObj("test person")
         card_list = [Card("S", "10"), Card("H", "J")]
         p.add_card_to_hand(card_list)
         self.assertTrue((len(p.get_hand()) == 2))
 
     def test_get_points_of_hand_gives_expected_value(self):
-        p = Person("test_person")
+        class TempObj(Person):
+            def __int__(self, username):
+                super().__init__(username)
+
+            def make_game_decision(self):
+                raise NotImplementedError("It is an abstract test")
+        p = TempObj("test person")
         card_list = [Card("S", "10"), Card("H", "J")]
         p.add_card_to_hand(card_list)
         score = p.get_points_of_hand()
@@ -29,7 +49,13 @@ class TestPerson(TestCase):
         self.assertTrue(score == 20 and p.get_points_of_hand() == 21)
 
     def test_get_points_with_multiple_aces(self):
-        p = Person("test_person")
+        class TempObj(Person):
+            def __int__(self, username):
+                super().__init__(username)
+
+            def make_game_decision(self):
+                raise NotImplementedError("It is an abstract test")
+        p = TempObj("test person")
         card_list = [Card("S", "A"), Card("H", "A")]
         p.add_card_to_hand(card_list)
         score = p.get_points_of_hand()
@@ -40,7 +66,13 @@ class TestPerson(TestCase):
         self.assertTrue(score == 12 and score_two == 13 and p.get_points_of_hand() == 12)
 
     def test_show_hand_gives_expected_string(self):
-        p = Player("test_player")
+        class TempObj(Person):
+            def __int__(self, username):
+                super().__init__(username)
+
+            def make_game_decision(self):
+                raise NotImplementedError("Its an abstract test")
+        p = TempObj("test person")
         card_list = [Card("S", "10"), Card("H", "J")]
         p.add_card_to_hand(card_list)
         with io.StringIO() as buffer:
