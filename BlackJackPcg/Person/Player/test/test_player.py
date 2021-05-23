@@ -33,7 +33,7 @@ class TestPlayer(TestCase):
                 mocked_print.assert_called_with("Please enter only 1 for yes or 0 for no.") and self.assertTrue(the_exception_raised == "To break the while loop")
 
     def test_make_game_decision_gives_value_error_when_string_as_input(self):
-        p = Player("test_player")
+        pass
         # mock to input a string - need to check that a ValueError results
 
     def test_make_game_decision_prints_message_when_string_as_input(self):
