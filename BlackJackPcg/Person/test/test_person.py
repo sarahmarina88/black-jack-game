@@ -1,14 +1,13 @@
 from unittest import TestCase
 import io
 import contextlib
-
 from BlackJackPcg.Card import Card
 from BlackJackPcg.Person import Person
 
 
 class TestPerson(TestCase):
-    #rewritten to put the tempobj class outside of the individual tests - can have once instead of repeating
-#args allows diff variables to be given -
+    # rewritten to put the tempobj class outside of the individual tests - can have once instead of repeating
+    # args allows diff variables to be given -
     def __init__(self, *args, **kwargs):
         super(TestPerson, self).__init__(*args, **kwargs)
 
