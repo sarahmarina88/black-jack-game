@@ -6,19 +6,25 @@ if __name__ == '__main__':
     list_of_players_names = []
     need_number_players = True
 
-    while need_number_players:
+    player_ask_count = 0
+    while need_number_players and player_ask_count <= 3:
         try:
             num_players = int(input("How many players are playing?"))
-            if num_players <= 0:
+            if num_players <= 0 or num_players == None :
                 print("There has to be at least one player! Enter the number of players as an integer.")
+                player_ask_count += 1
             elif num_players > 4:
                 print("Up to four players can be added. Enter the number of players as an integer.")
+                player_ask_count +=1
             else:
                 need_number_players = False
         except ValueError as e:
             print("Please enter number of players as an integer!")
+            player_ask_count +=1
+    if player_ask_count > 3:
+        print("Sorry too many invalid inputs - please restart program.")
+        exit(1)
 
-    # need to edit so names cannot be blank
     for n in range(num_players):
         if n == 0:
             player_name = input("Enter the first player's username:")
@@ -46,7 +52,8 @@ if __name__ == '__main__':
             games_won_dict[g.get_winner().get_username()] += 1
         # see if user wants to play again
         new_game_choice_needed = True
-        while new_game_choice_needed:
+        wrong_input_count = 0
+        while new_game_choice_needed and wrong_input_count <= 3:
             try:
                 new_game_dec = int(input("Would you like to play another game? Enter 1 for yes or 0 for no."))
                 if new_game_dec == 0:
@@ -56,9 +63,13 @@ if __name__ == '__main__':
                     new_game_choice_needed = False
                 else:
                     print("Please enter only 1 for yes or 0 for no.")
+                    wrong_input_count += 1
             except ValueError as e:
                 print("Please enter answer as an integer (0 for no, 1 for yes).")
-
+                wrong_input_count += 1
+        if wrong_input_count > 3:
+            print("Sorry - too many invalid inputs. Exiting program...")
+            exit(1)
     print("\nThe overall number of games won by each player were:-")
     for name in games_won_dict:
         print("- {} won {} games".format(name, games_won_dict[name]))
