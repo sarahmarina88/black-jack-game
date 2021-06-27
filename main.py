@@ -26,12 +26,17 @@ if __name__ == '__main__':
         exit(1)
 
     for n in range(num_players):
-        if n == 0:
-            player_name = input("Enter the first player's username:")
-            list_of_players_names.append(player_name)
-        else:
-            player_name = input("Enter the next player's username:")
-            list_of_players_names.append(player_name)
+        need_username = True
+        while need_username:
+            player_name = input("Enter the username for player {}:".format((n+1)))
+            if player_name in list_of_players_names:
+                print("Sorry, each user should have a unique username!")
+            elif player_name.strip() == "" or " " in player_name:
+                print("Sorry, the username cannot be blank and should not contain spaces!")
+            else:
+                need_username = False
+                list_of_players_names.append(player_name)
+
     print("{} players have been added! You will be playing against a dealer called Bot.".format(num_players))
 
     # way to count how many rounds each player won
