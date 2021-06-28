@@ -5,7 +5,6 @@ if __name__ == '__main__':
 
     list_of_players_names = []
     need_number_players = True
-
     player_ask_count = 0
     while need_number_players and player_ask_count <= 3:
         try:
@@ -21,17 +20,27 @@ if __name__ == '__main__':
         except ValueError as e:
             print("Please enter number of players as an integer!")
             player_ask_count +=1
-    if player_ask_count > 3:
+    if need_number_players and player_ask_count >3:
         print("Sorry too many invalid inputs - please restart program.")
         exit(1)
 
     for n in range(num_players):
-        if n == 0:
-            player_name = input("Enter the first player's username:")
-            list_of_players_names.append(player_name)
-        else:
-            player_name = input("Enter the next player's username:")
-            list_of_players_names.append(player_name)
+        need_username = True
+        name_ask_count = 0
+        while need_username:
+            player_name = input("Enter the username for player {}:".format((n+1)))
+            if name_ask_count > 3:
+                print("You have tried too many invalid usernames - please restart the program.")
+                exit(1)
+            elif player_name in list_of_players_names:
+                name_ask_count += 1
+                print("Sorry, a player already has this name - each player should have a unique username!")
+            elif player_name.strip() == "" or " " in player_name:
+                name_ask_count += 1
+                print("Sorry, the username cannot be blank and should not contain spaces!")
+            else:
+                need_username = False
+                list_of_players_names.append(player_name)
     print("{} players have been added! You will be playing against a dealer called Bot.".format(num_players))
 
     # way to count how many rounds each player won
@@ -62,10 +71,10 @@ if __name__ == '__main__':
                 elif new_game_dec == 1:
                     new_game_choice_needed = False
                 else:
-                    print("Please enter only 1 for yes or 0 for no.")
+                    print("Invalid input - answer should be 0 or 1!")
                     wrong_input_count += 1
             except ValueError as e:
-                print("Please enter answer as an integer (0 for no, 1 for yes).")
+                print("Invalid input - answer should be an integer!")
                 wrong_input_count += 1
         if wrong_input_count > 3:
             print("Sorry - too many invalid inputs. Exiting program...")
