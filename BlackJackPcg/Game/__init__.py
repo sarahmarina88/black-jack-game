@@ -104,21 +104,16 @@ class Game:
                     winner_list.append(player)
                 elif player.get_points_of_hand() > 21:
                     del score_dict[player]
-
-            if len(winner_list) == 1:
-                self.winner = winner_list[0]
-                print("There is one winner! {} has 21 and has won the game!\n".format(winner_list[0].get_username()))
-            elif len(winner_list) >= 2:
-                self.winner = None
-                print("Draw! The players with 21 are: {}!\n".format(' and '.join(x.get_username() for x in winner_list)))
-            #if no one got 21 find highest score of those who did not exceed 21 - these are winner
-            elif len(winner_list) == 0:
+            # if no winners by having 21 look at those with less than 21 - top scores are winners
+            if len(winner_list) == 0:
                 for player in score_dict:
                     if score_dict[player] == max(score_dict.values()):
                         winner_list.append(player)
-                if len(winner_list) == 1:
-                    self.winner = winner_list[0]
-                    print("The winner is {} with a score of {}".format(winner_list[0].get_username(),max(score_dict.values())))
-                if len(winner_list) > 1:
-                    self.winner = None
-                    print("The game was a draw between {}.".format(' and '.join([x.get_username() for x in winner_list])))
+            # now if one winner in list announce winner otherwise announce draw
+            if len(winner_list) == 1:
+                self.winner = winner_list[0]
+                print("There is one winner! {} has score {} and has won the game!\n".format(winner_list[0].get_username(), winner_list[0].get_points_of_hand()))
+            if len(winner_list) > 1:
+                self.winner = None
+                print("The game was a draw between {} who all had score {}.".format((' and '.join([x.get_username() for x in winner_list])), winner_list[0].get_points_of_hand()))
+
