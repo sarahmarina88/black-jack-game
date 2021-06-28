@@ -8,7 +8,7 @@ class Dealer(Person):
     def make_game_decision(self):
         if self.get_points_of_hand() >= 17:
             return False
-        if self.get_points_of_hand() < 17:
+        else:
             return True
 
     def show_hand_during_player_turn(self):
