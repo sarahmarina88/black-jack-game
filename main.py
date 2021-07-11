@@ -55,7 +55,7 @@ if __name__ == '__main__':
         list_of_players = [Player(name) for name in list_of_players_names]
         # play the game with the list of players
         g = Game(list_of_players)
-        g.play_game()
+        g.play_game_alternative()
         # add the winner to counts of number of games won dictionary
         if g.get_winner() is not None:
             games_won_dict[g.get_winner().get_username()] += 1
