@@ -188,7 +188,7 @@ class Game:
                 if 21 >= p.get_points_of_hand() > top_score:
                     top_score = p.get_points_of_hand()
 
-            if self.dealer.get_points_of_hand() > top_score:
+            if 21 >= self.dealer.get_points_of_hand() > top_score:
                 top_score = self.dealer.get_points_of_hand()
                 winner_list.append(self.dealer)
 
